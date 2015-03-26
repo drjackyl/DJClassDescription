@@ -11,11 +11,11 @@ I like to put meaningful -debugDescription-implementations into my code. Many of
 ```Objective-C
 @interface SomeClass : NSObject
 
+@property (nonatomic, weak) id delegate;
 @property (nonatomic, getter=isThisOrThat) BOOL thisOrThat;
 @property (nonatomic, strong) NSNumber *optionalOnOrOff;
 @property (nonatomic) NSUInteger numberOfThose;
 @property (nonatomic) NSDate *releaseDate;
-@property (nonatomic, weak) id delegate;
 
 @end
 
