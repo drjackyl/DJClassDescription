@@ -12,6 +12,15 @@
 
 
 
+typedef NS_OPTIONS(NSUInteger, DJClassDescriptionOption) {
+    DJClassDescriptionOption_EscapeNewlines = 1 << 0,    // Will display newlines as \n in the string (\\n)
+    DJClassDescriptionOption_EscapeTabs     = 1 << 1     // Will display tabs as \t in the string (\\t)
+};
+
+
+
+
+
 /**
  Provides class-methods to help create description-strings for description-methods
  */
@@ -57,6 +66,19 @@
  @return Single-quoted string containing the given string or an empty string, if the string was nil
  */
 + (NSString *)descriptionForString:(NSString *)string;
+
+/**
+ Returns a single-quoted string or an empty string, if string is nil, with a given maximum length
+ 
+ When you put a nil-string into a string-format it will be formatted with '(null)'. This method
+ will return an empty string for nil and two single-quotes for an empty string.
+ 
+ @param string String to return a description-string for
+ @param options Bitmask defining options for the string
+ @param maxLength A maximum length of the returned string
+ @return Single-quoted string containing the given string or an empty string, if the string was nil
+ */
++ (NSString *)descriptionForString:(NSString *)string options:(DJClassDescriptionOption)options maxLength:(NSUInteger)maxLength;
 
 /**
  Returns a string-representation of the given BOOL

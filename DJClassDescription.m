@@ -19,9 +19,9 @@
 #pragma mark Class Methods
 + (NSString *)descriptionForBooleanNumber:(NSNumber *)number {
     if (number) {
-        if ([number isEqualTo:@YES]) {
+        if ([number isEqual:@YES]) {
             return @"@YES";
-        } else if ([number isEqualTo:@NO]) {
+        } else if ([number isEqual:@NO]) {
             return @"@NO";
         } else {
             return @"INVALID";
@@ -59,6 +59,25 @@
         return [NSString stringWithFormat:@"'%@'", string];
     } else {
         return @"";
+    }
+}
+
+
++ (NSString *)descriptionForString:(NSString *)string options:(DJClassDescriptionOption)options maxLength:(NSUInteger)maxLength {
+    if (!string) { return @""; }
+    
+    NSString *descriptionString = string;
+    if (options & DJClassDescriptionOption_EscapeNewlines) {
+        descriptionString = [descriptionString stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+    }
+    if (options & DJClassDescriptionOption_EscapeTabs) {
+        descriptionString = [descriptionString stringByReplacingOccurrencesOfString:@"\t" withString:@"\\t"];
+    }
+    
+    if (maxLength < string.length) {
+        return [descriptionString substringToIndex:maxLength-1];
+    } else {
+        return descriptionString;
     }
 }
 
